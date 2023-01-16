@@ -13,4 +13,5 @@ public class CompanyRepository {
     public static CompanyRepository of(ConnectionPool pool) {
         return new CompanyRepository(pool);
     }
+
 }
