@@ -8,13 +8,11 @@ public class ApplicationRunner {
 
     public static void main(String[] args) {
         try (ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("application.xml")) {
-            var connectionPool = context.getBean("p2", ConnectionPool.class);
+            var connectionPool = context.getBean(ConnectionPool.class);
             System.out.println(connectionPool);
 
-            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            var companyRepository = context.getBean(CrudRepository.class);
             System.out.println(companyRepository.findById(1));
-
-            System.out.println();
         }
     }
 }

@@ -1,58 +1,33 @@
 package az.iamusayev.spring.database.pool;
 
-import java.util.List;
-import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 
 
-public class ConnectionPool implements InitializingBean, BeanPostProcessor {
+@Component("pool1")
+public class ConnectionPool  {
 
-    private String username;
-    private Integer poolSize;
-    private List<Object> args;
-    private Map<String, Object> properties;
+    private final String username;
+    private final Integer poolSize;
 
-
-    public ConnectionPool() {
-    }
-
-    public ConnectionPool(String username, Integer poolSize, List<Object> args, Map<String, Object> properties) {
+    public ConnectionPool(@Value("{db.username}") String username, @Value("${db.pool.size}") Integer poolSize) {
         this.username = username;
         this.poolSize = poolSize;
-        this.args = args;
-        this.properties = properties;
     }
 
-    public void setProperties(Map<String, Object> properties) {
-        this.properties = properties;
-    }
 
     @PostConstruct
     public void init() {
         System.out.println("Init connection pool");
     }
 
-    @Override
-    public void afterPropertiesSet() throws Exception {
-
-    }
 
     @PreDestroy
     public void destroy() {
         System.out.println("Clean connection pool");
-    }
-
-    @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return BeanPostProcessor.super.postProcessBeforeInitialization(bean, beanName);
-    }
-
-    @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-        return BeanPostProcessor.super.postProcessAfterInitialization(bean, beanName);
     }
 }
