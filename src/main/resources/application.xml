@@ -13,16 +13,18 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
     <!--        <property name="locations" value="classpath:application.properties"></property>-->
     <!--    </bean>-->
 
-<!--    ${regularly expression}-->
-    <bean class="az.iamusayev.bfpp.LogBeanFactoryPostProcessor"/>
-    <bean class="az.iamusayev.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
+    <!--    ${regularly expression}-->
+    <bean class="az.iamusayev.spring.bfpp.LogBeanFactoryPostProcessor"/>
+    <bean class="az.iamusayev.spring.bfpp.VerifyPropertyBeanFactoryPostProcessor"/>
     <bean class="az.iamusayev.spring.bpp.InjectBeanPostProcessor"/>
     <bean class="az.iamusayev.spring.bpp.TransactionBeanPostProcessor"/>
+    <bean class="az.iamusayev.spring.bpp.AuditingBeanPostProcessor"/>
 
     <bean id="driver" class="java.lang.String">
         <constructor-arg type="java.lang.String" value="${db.driver}"/>
     </bean>
 
+    <bean id="pool2" class="az.iamusayev.spring.database.pool.ConnectionPool"/>
     <bean id="pool1" name="p1,p2,p3" class="az.iamusayev.spring.database.pool.ConnectionPool">
         <constructor-arg name="username" type="java.lang.String" value="${db.username}"/>
         <constructor-arg name="properties" type="java.util.Map">
@@ -35,7 +37,7 @@ http://www.springframework.org/schema/context/spring-context-4.0.xsd">
                 <value>--arg2=value2</value>
                 <ref bean="driver"/>
             </list>
-<!--            #{здесь можно писать более сложные вещи}-->
+            <!--            #{здесь можно писать более сложные вещи}-->
         </constructor-arg>
         <property name="properties">
             <map>

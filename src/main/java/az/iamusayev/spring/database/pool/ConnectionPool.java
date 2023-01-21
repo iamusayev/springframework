@@ -6,16 +6,19 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 
 
 public class ConnectionPool implements InitializingBean, BeanPostProcessor {
 
-    private final String username;
-    private final Integer poolSize;
-    private final List<Object> args;
+    private String username;
+    private Integer poolSize;
+    private List<Object> args;
     private Map<String, Object> properties;
+
+
+    public ConnectionPool() {
+    }
 
     public ConnectionPool(String username, Integer poolSize, List<Object> args, Map<String, Object> properties) {
         this.username = username;

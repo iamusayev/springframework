@@ -1,7 +1,7 @@
 package az.iamusayev;
 
 import az.iamusayev.spring.database.pool.ConnectionPool;
-import az.iamusayev.spring.database.repository.CompanyRepository;
+import az.iamusayev.spring.database.repository.CrudRepository;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class ApplicationRunner {
@@ -11,8 +11,10 @@ public class ApplicationRunner {
             var connectionPool = context.getBean("p2", ConnectionPool.class);
             System.out.println(connectionPool);
 
-            CompanyRepository companyRepository = context.getBean("companyRepository", CompanyRepository.class);
-            System.out.println(companyRepository);
+            var companyRepository = context.getBean("companyRepository", CrudRepository.class);
+            System.out.println(companyRepository.findById(1));
+
+            System.out.println();
         }
     }
 }

@@ -7,8 +7,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.util.ReflectionUtils;
 
-//Так как этот класс реализует интерфейс BeanPostProcessor наш ApplicationContext будет его обрабатывать в первую очередь потому что все BeanPostProcessor'ы
-//используются для жизненного цикла инициализации других бинов
 public class InjectBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware {
 
     private ApplicationContext applicationContext;
