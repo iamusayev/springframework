@@ -1,4 +1,4 @@
-package az.iamusayev.spring.database.service;
+package az.iamusayev.spring.service;
 
 import az.iamusayev.spring.database.entity.Company;
 import az.iamusayev.spring.database.repository.CrudRepository;
