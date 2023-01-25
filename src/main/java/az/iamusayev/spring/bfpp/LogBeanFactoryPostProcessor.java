@@ -1,11 +1,14 @@
-package az.iamusayev.bfpp;
+package az.iamusayev.spring.bfpp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.core.Ordered;
+import org.springframework.core.PriorityOrdered;
+import org.springframework.stereotype.Component;
 
-public class VerifyPropertyBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
+@Component
+public class LogBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered, PriorityOrdered {
 
     @Override
     public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
@@ -14,6 +17,6 @@ public class VerifyPropertyBeanFactoryPostProcessor implements BeanFactoryPostPr
 
     @Override
     public int getOrder() {
-        return 0;
+        return Ordered.HIGHEST_PRECEDENCE;
     }
 }
