@@ -10,33 +10,23 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Repository;
 
+@Repository
+@Scope(BeanDefinition.SCOPE_PROTOTYPE)
 @Transaction
 @Auditing
-@Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class CompanyRepository implements CrudRepository<Integer, Company> {
 
+    private ConnectionPool pool1;
+    private List<ConnectionPool> pools;
+    private Integer poolSize;
 
-    //    @Resource(name = "pool1")
-//    @Qualifier("pool1")
-//    @Autowired
-    private final ConnectionPool pool1;
-    private final List<ConnectionPool> pools;
-    private final Integer poolSize;
-
-    public CompanyRepository(ConnectionPool pool1,
-            List<ConnectionPool> pools,
+    public CompanyRepository(ConnectionPool pool1, List<ConnectionPool> pools,
             @Value("${db.pool.size}") Integer poolSize) {
         this.pool1 = pool1;
         this.pools = pools;
         this.poolSize = poolSize;
-    }
-
-    @Override
-    public Optional<Company> findById(Integer id) {
-        System.out.println("findById method");
-        return Optional.of(new Company(id));
     }
 
     @PostConstruct
@@ -45,8 +35,13 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
     }
 
     @Override
-    public void delete(Company entity) {
-        System.out.println("delete method");
+    public Optional<Company> findById(Integer id) {
+        System.out.println("findById method...");
+        return Optional.of(new Company(id));
     }
 
+    @Override
+    public void delete(Company entity) {
+        System.out.println("delete method...");
+    }
 }
