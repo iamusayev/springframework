@@ -16,9 +16,9 @@ public class JpaConfiguration {
         System.out.println("Jpa configuration is enabled");
     }
 
-    @Bean
-    @ConfigurationProperties(prefix = "db")
-    public DatabaseProperties databaseProperties() {
-        return new DatabaseProperties();
-    }
+//    @Bean
+//    @ConfigurationProperties(prefix = "db")
+//    public DatabaseProperties databaseProperties() {
+//        return new DatabaseProperties();
+//    }
 }
