@@ -20,3 +20,11 @@ db:
       timeout: 3
 
 spring.profiles.active: prod
+
+logging:
+  level:
+    root: INFO
+    az.iamusayev.spring.database.repository.CompanyRepository: INFO
+  file:
+    name: iamusayev.log
+    path: /
