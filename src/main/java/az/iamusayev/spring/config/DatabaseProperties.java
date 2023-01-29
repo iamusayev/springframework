@@ -2,27 +2,25 @@ package az.iamusayev.spring.config;
 
 import java.util.List;
 import java.util.Map;
-import lombok.Data;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 
 //@Data
 //@NoArgsConstructor
 //@ConfigurationProperties(prefix = "db")
 //@Component
-@Data
-public class DatabaseProperties {
+@ConfigurationProperties(prefix = "db")
+public record DatabaseProperties(String username,
+                                 String password,
+                                 String driver,
+                                 String hosts,
+                                 PoolProperties pool,
+                                 List<PoolProperties> pools,
+                                 Map<String, Object> properties
+) {
 
-    private String username;
-    private String password;
-    private String driver;
-    private String hosts;
-    private PoolProperties pool;
-    private List<PoolProperties> pools;
-    private Map<String, Object> properties;
 
+    public record PoolProperties(Integer size,
+                                 Integer timeout) {
 
-    @Data
-    public static class PoolProperties {
-        private Integer size;
-        private Integer timeout;
     }
 }
