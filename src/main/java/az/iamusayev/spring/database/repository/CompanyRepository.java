@@ -4,6 +4,7 @@ import az.iamusayev.spring.bpp.Auditing;
 import az.iamusayev.spring.bpp.Transaction;
 import az.iamusayev.spring.database.entity.Company;
 import az.iamusayev.spring.database.pool.ConnectionPool;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.PostConstruct;
@@ -39,7 +40,7 @@ public class CompanyRepository implements CrudRepository<Integer, Company> {
     @Override
     public Optional<Company> findById(Integer id) {
         log.info("findById method...");
-        return Optional.of(new Company(id));
+        return Optional.of(new Company(id, null, Collections.emptyMap()));
     }
 
     @Override
