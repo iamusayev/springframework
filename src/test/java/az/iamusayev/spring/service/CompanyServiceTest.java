@@ -8,7 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import az.iamusayev.spring.database.entity.Company;
-import az.iamusayev.spring.database.repository.CrudRepository;
+import az.iamusayev.spring.database.repository.CompanyRepository;
 import az.iamusayev.spring.dto.CompanyReadDto;
 import az.iamusayev.spring.listener.entity.EntityEvent;
 import java.util.Collections;
@@ -17,7 +17,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
-import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -26,7 +25,7 @@ import org.springframework.context.ApplicationEventPublisher;
 
 
 @TestInstance(value = Lifecycle.PER_CLASS)
-@ExtendWith({MockitoExtension.class, az.iamusayev.spring.service.Test.class})
+@ExtendWith(MockitoExtension.class)
 class CompanyServiceTest {
 
     private static final Integer COMPANY_ID = 1;
@@ -37,7 +36,7 @@ class CompanyServiceTest {
     }
 
     @Mock
-    private CrudRepository<Integer, Company> companyCrudRepository;
+    private CompanyRepository companyRepository;
     @Mock
     private UserService userService;
     @Mock
@@ -45,10 +44,12 @@ class CompanyServiceTest {
     @InjectMocks
     private CompanyService companyService;
 
+
+
     @Test
     void findById() {
         doReturn(Optional.of(new Company(COMPANY_ID, null, Collections.emptyMap())))
-                .when(companyCrudRepository).findById(COMPANY_ID);
+                .when(companyRepository).findById(COMPANY_ID);
         Optional<CompanyReadDto> actualResult = companyService.findById(COMPANY_ID);
 
         assertTrue(actualResult.isPresent());
